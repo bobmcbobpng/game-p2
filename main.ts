@@ -4,6 +4,8 @@ namespace SpriteKind {
     export const tptoshooting = SpriteKind.create()
     export const aim = SpriteKind.create()
     export const StartPuck = SpriteKind.create()
+    export const AIhelp = SpriteKind.create()
+    export const defadvance = SpriteKind.create()
 }
 function Clear () {
     Net1.destroy()
@@ -12,16 +14,85 @@ function Clear () {
     Net4.destroy()
     Puck.destroy()
 }
+function defAI () {
+    Defence.follow(defpos3)
+    _2secdelay()
+    Defence.follow(defpos2)
+    _2secdelay()
+    Defence.follow(defpos1)
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Teleporter1, function (sprite, otherSprite) {
     Game1()
 })
+function defpositionfollow () {
+    defpos1 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.AIhelp)
+    defpos1.setPosition(80, 344)
+    controller.moveSprite(defpos1)
+    defpos2 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.AIhelp)
+    defpos2.setPosition(80, 328)
+    controller.moveSprite(defpos2)
+    defpos3 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.AIhelp)
+    defpos3.setPosition(80, 312)
+    controller.moveSprite(defpos3)
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Teleporter2, function (sprite, otherSprite) {
     Game2()
 })
-function Goal () {
+function Goaldefstuff () {
     for (let value of tiles.getTilesByType(assets.tile`myTile3`)) {
-        Net5 = sprites.create(assets.image`Net5`, SpriteKind.tptoshooting)
-        tiles.placeOnTile(Net5, value)
+        lineonmap = sprites.create(assets.image`Net5`, SpriteKind.tptoshooting)
+        tiles.placeOnTile(lineonmap, value)
         tiles.setTileAt(value, assets.tile`myTile0`)
     }
     for (let value of tiles.getTilesByType(assets.tile`myTile6`)) {
@@ -29,14 +100,15 @@ function Goal () {
         tiles.placeOnTile(Net6, value)
         tiles.setTileAt(value, assets.tile`myTile0`)
     }
+    defstuffsetup()
 }
 function Clear2 () {
     Topdownplayer.destroy()
     Defence.destroy()
-    Net5.destroy()
+    lineonmap.destroy()
     Net6.destroy()
 }
-function ShootingGame () {
+function Game11 () {
     Clear2()
     tiles.setTilemap(tilemap`level3`)
     Map = 2
@@ -46,9 +118,9 @@ function ShootingGame () {
 function Game2 () {
 	
 }
-function Defmove () {
-	
-}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.defadvance, function (sprite, otherSprite) {
+    Defence.follow(Topdownplayer)
+})
 function Menu () {
     tiles.setTilemap(tilemap`Menu`)
     Map = 0
@@ -75,9 +147,326 @@ function Menu () {
         tiles.setTileAt(value, assets.tile`myTile0`)
     }
 }
+function _2secdelay () {
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+    pause(10)
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.tptoshooting, function (sprite, otherSprite) {
-    ShootingGame()
+    Game11()
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`transparency16`, function (sprite, location) {
+	
+})
+function defstuffsetup () {
+    for (let value of tiles.getTilesByType(assets.tile`myTile81`)) {
+        line0 = sprites.create(img`
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 6 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 6 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 6 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 6 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 6 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 6 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 6 5 5 5 5 5 5 6 5 5 5 5 5 5 
+            5 5 5 6 5 5 5 5 5 5 6 5 5 5 5 5 
+            5 5 5 5 6 5 5 5 5 5 5 6 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            `, SpriteKind.defadvance)
+        tiles.placeOnTile(line0, value)
+        tiles.setTileAt(value, assets.tile`myTile0`)
+    }
+    for (let value of tiles.getTilesByType(assets.tile`myTile89`)) {
+        line1 = sprites.create(img`
+            7 7 7 7 5 5 5 5 5 5 5 5 5 5 5 5 
+            7 7 7 7 5 5 5 5 5 6 5 5 5 5 5 5 
+            7 7 7 7 5 5 5 5 5 5 6 5 5 5 5 5 
+            7 7 7 7 5 5 5 5 5 5 5 6 5 5 5 5 
+            7 7 7 7 7 5 5 5 5 5 5 5 6 5 5 5 
+            7 7 7 7 7 5 5 5 5 5 5 5 5 6 5 5 
+            5 7 7 7 7 5 5 5 5 5 5 5 5 5 5 5 
+            5 7 7 7 7 5 5 5 5 5 5 5 5 5 5 5 
+            5 7 7 7 7 7 5 5 5 5 5 5 5 5 5 5 
+            5 7 7 7 7 7 5 5 5 6 5 5 5 5 5 5 
+            5 5 7 7 7 7 5 5 5 5 6 5 5 5 5 5 
+            5 5 7 7 7 7 7 5 5 5 5 6 5 5 5 5 
+            5 5 5 7 7 7 7 7 5 5 5 5 5 5 5 5 
+            5 5 5 7 7 7 7 7 5 5 5 5 5 5 5 5 
+            5 5 5 7 7 7 7 7 7 5 5 5 5 5 5 5 
+            5 5 5 5 7 7 7 7 7 7 5 5 5 5 5 5 
+            `, SpriteKind.defadvance)
+        tiles.placeOnTile(line1, value)
+        tiles.setTileAt(value, assets.tile`myTile65`)
+    }
+    for (let value of tiles.getTilesByType(assets.tile`myTile90`)) {
+        line2 = sprites.create(img`
+            5 5 5 5 5 5 5 5 5 5 5 5 7 7 7 7 
+            5 5 5 5 5 5 5 5 5 6 5 5 7 7 7 7 
+            5 5 5 5 5 5 5 5 5 5 6 5 5 7 7 7 
+            5 5 5 5 5 5 5 5 5 5 5 6 5 5 7 7 
+            5 5 5 5 5 5 5 5 5 5 5 5 6 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 6 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 6 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 6 5 5 5 5 5 5 6 5 5 5 5 5 5 
+            5 5 5 6 5 5 5 5 5 5 6 5 5 5 5 5 
+            5 5 5 5 6 5 5 5 5 5 5 6 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            `, SpriteKind.defadvance)
+        tiles.placeOnTile(line2, value)
+        tiles.setTileAt(value, assets.tile`myTile71`)
+    }
+    for (let value of tiles.getTilesByType(assets.tile`myTile91`)) {
+        line3 = sprites.create(img`
+            7 7 7 7 5 5 5 5 5 5 5 5 5 5 5 5 
+            7 7 7 7 5 5 5 5 5 6 5 5 5 5 5 5 
+            7 7 7 5 5 5 5 5 5 5 6 5 5 5 5 5 
+            7 7 5 5 5 5 5 5 5 5 5 6 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 6 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 6 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 6 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 6 5 5 5 5 5 5 6 5 5 5 5 5 5 
+            5 5 5 6 5 5 5 5 5 5 6 5 5 5 5 5 
+            5 5 5 5 6 5 5 5 5 5 5 6 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            `, SpriteKind.defadvance)
+        tiles.placeOnTile(line3, value)
+        tiles.setTileAt(value, assets.tile`myTile70`)
+    }
+    for (let value of tiles.getTilesByType(assets.tile`myTile92`)) {
+        line4 = sprites.create(img`
+            5 5 5 5 5 5 5 5 5 5 5 5 7 7 7 7 
+            5 5 5 5 5 5 5 5 5 6 5 5 7 7 7 7 
+            5 5 5 5 5 5 5 5 5 5 6 5 7 7 7 7 
+            5 5 5 5 5 5 5 5 5 5 5 5 7 7 7 7 
+            5 5 5 5 5 5 5 5 5 5 5 7 7 7 7 7 
+            5 5 5 5 5 5 5 5 5 5 5 7 7 7 7 7 
+            5 5 5 5 5 5 5 5 5 5 5 7 7 7 7 5 
+            5 5 5 5 5 5 5 5 5 5 5 7 7 7 7 5 
+            5 6 5 5 5 5 5 5 5 5 7 7 7 7 7 5 
+            5 5 6 5 5 5 5 5 5 5 7 7 7 7 7 5 
+            5 5 5 6 5 5 5 5 5 5 7 7 7 7 5 5 
+            5 5 5 5 6 5 5 5 5 7 7 7 7 7 5 5 
+            5 5 5 5 5 5 5 5 7 7 7 7 7 5 5 5 
+            5 5 5 5 5 5 5 5 7 7 7 7 7 5 5 5 
+            5 5 5 5 5 5 5 7 7 7 7 7 7 5 5 5 
+            5 5 5 5 5 5 7 7 7 7 7 7 5 5 5 5 
+            `, SpriteKind.defadvance)
+        tiles.placeOnTile(line4, value)
+        tiles.setTileAt(value, assets.tile`myTile60`)
+    }
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.StartPuck, function (sprite, otherSprite) {
     Map = 1.1
     Topdownplayer.setImage(img`
@@ -97,13 +486,16 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.StartPuck, function (sprite, oth
         `)
     pause(10)
     Startpuck.destroy()
-    Defmove()
+    defAI()
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+	
 })
 function Game1 () {
     Clear()
     tiles.setTilemap(tilemap`Breakaway`)
     Map = 1
-    Goal()
+    Goaldefstuff()
     Defence = sprites.create(assets.image`Defence`, SpriteKind.Enemy)
     Topdownplayer = sprites.create(assets.image`Breakaway-player`, SpriteKind.Player)
     Startpuck = sprites.create(img`
@@ -115,14 +507,23 @@ function Game1 () {
     Defence.setPosition(80, 200)
     controller.moveSprite(Topdownplayer)
     scene.cameraFollowSprite(Topdownplayer)
+    defpositionfollow()
 }
 let Startpuck: Sprite = null
+let line4: Sprite = null
+let line3: Sprite = null
+let line2: Sprite = null
+let line1: Sprite = null
+let line0: Sprite = null
 let Aimsight: Sprite = null
 let Map = 0
-let Defence: Sprite = null
 let Topdownplayer: Sprite = null
 let Net6: Sprite = null
-let Net5: Sprite = null
+let lineonmap: Sprite = null
+let defpos1: Sprite = null
+let defpos2: Sprite = null
+let defpos3: Sprite = null
+let Defence: Sprite = null
 let Puck: Sprite = null
 let Net4: Sprite = null
 let Net3: Sprite = null
