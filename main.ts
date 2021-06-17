@@ -3,6 +3,7 @@ namespace SpriteKind {
     export const Teleporter2 = SpriteKind.create()
     export const tptoshooting = SpriteKind.create()
     export const aim = SpriteKind.create()
+    export const StartPuck = SpriteKind.create()
 }
 function Clear () {
     Net1.destroy()
@@ -38,14 +39,19 @@ function Clear2 () {
 function ShootingGame () {
     Clear2()
     tiles.setTilemap(tilemap`level3`)
+    Map = 2
     Aimsight = sprites.create(assets.image`Aim`, SpriteKind.aim)
-    controller.moveSprite(Aimsight)
+    controller.moveSprite(Aimsight, 200, 200)
 }
 function Game2 () {
 	
 }
+function Defmove () {
+	
+}
 function Menu () {
     tiles.setTilemap(tilemap`Menu`)
+    Map = 0
     Puck = sprites.create(assets.image`Puck`, SpriteKind.Player)
     controller.moveSprite(Puck)
     for (let value of tiles.getTilesByType(assets.tile`myTile1`)) {
@@ -72,17 +78,47 @@ function Menu () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.tptoshooting, function (sprite, otherSprite) {
     ShootingGame()
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.StartPuck, function (sprite, otherSprite) {
+    Map = 1.1
+    Topdownplayer.setImage(img`
+        . . . . . . . . . . . 3 
+        . . . . . . . . . . . . 
+        . . . . . . . . . . 1 1 
+        . . . . . . . . . 1 . . 
+        . . . 7 7 7 7 . 1 . . . 
+        . . 7 7 7 7 7 7 . . . . 
+        . 7 7 7 7 7 7 7 7 . . . 
+        7 7 7 7 7 7 7 7 7 7 . . 
+        7 7 7 7 7 7 7 7 7 7 . . 
+        7 7 7 7 7 7 7 7 7 7 . . 
+        . 7 7 7 7 7 7 7 7 . . . 
+        . . 7 7 7 7 7 7 . . . . 
+        . . . . 7 7 . . . . . . 
+        `)
+    pause(10)
+    Startpuck.destroy()
+    Defmove()
+})
 function Game1 () {
     Clear()
     tiles.setTilemap(tilemap`Breakaway`)
+    Map = 1
     Goal()
     Defence = sprites.create(assets.image`Defence`, SpriteKind.Enemy)
     Topdownplayer = sprites.create(assets.image`Breakaway-player`, SpriteKind.Player)
+    Startpuck = sprites.create(img`
+        3 3 
+        3 3 
+        `, SpriteKind.StartPuck)
     Topdownplayer.setPosition(80, 360)
+    Startpuck.setPosition(80, 288)
+    Defence.setPosition(80, 200)
     controller.moveSprite(Topdownplayer)
     scene.cameraFollowSprite(Topdownplayer)
 }
+let Startpuck: Sprite = null
 let Aimsight: Sprite = null
+let Map = 0
 let Defence: Sprite = null
 let Topdownplayer: Sprite = null
 let Net6: Sprite = null
@@ -93,3 +129,83 @@ let Net3: Sprite = null
 let Net2: Sprite = null
 let Net1: Sprite = null
 Menu()
+forever(function () {
+    if (Map == 0) {
+    	
+    }
+    if (Map == 1) {
+        if (controller.right.isPressed()) {
+            Topdownplayer.setImage(img`
+                . . . . . . . . . . . . 
+                . . . . . . . . . . . . 
+                . . . . . . . . . . 1 1 
+                . . . . . . . . . 1 . . 
+                . . . 7 7 7 7 . 1 . . . 
+                . . 7 7 7 7 7 7 . . . . 
+                . 7 7 7 7 7 7 7 7 . . . 
+                7 7 7 7 7 7 7 7 7 7 . . 
+                7 7 7 7 7 7 7 7 7 7 . . 
+                7 7 7 7 7 7 7 7 7 7 . . 
+                . 7 7 7 7 7 7 7 7 . . . 
+                . . 7 7 7 7 7 7 . . . . 
+                . . . . 7 7 . . . . . . 
+                `)
+        }
+        if (controller.left.isPressed()) {
+            Topdownplayer.setImage(img`
+                . . . . . . . . . . . . 
+                . . . . . . . . . . . . 
+                1 1 . . . . . . . . . . 
+                . . 1 . . . . . . . . . 
+                . . . 1 . 7 7 7 7 . . . 
+                . . . . 7 7 7 7 7 7 . . 
+                . . . 7 7 7 7 7 7 7 7 . 
+                . . 7 7 7 7 7 7 7 7 7 7 
+                . . 7 7 7 7 7 7 7 7 7 7 
+                . . 7 7 7 7 7 7 7 7 7 7 
+                . . . 7 7 7 7 7 7 7 7 . 
+                . . . . 7 7 7 7 7 7 . . 
+                . . . . . . 7 7 . . . . 
+                `)
+        }
+    }
+    if (Map == 1.1) {
+        if (controller.right.isPressed()) {
+            Topdownplayer.setImage(img`
+                . . . . . . . . . . . 3 
+                . . . . . . . . . . . . 
+                . . . . . . . . . . 1 1 
+                . . . . . . . . . 1 . . 
+                . . . 7 7 7 7 . 1 . . . 
+                . . 7 7 7 7 7 7 . . . . 
+                . 7 7 7 7 7 7 7 7 . . . 
+                7 7 7 7 7 7 7 7 7 7 . . 
+                7 7 7 7 7 7 7 7 7 7 . . 
+                7 7 7 7 7 7 7 7 7 7 . . 
+                . 7 7 7 7 7 7 7 7 . . . 
+                . . 7 7 7 7 7 7 . . . . 
+                . . . . 7 7 . . . . . . 
+                `)
+        }
+        if (controller.left.isPressed()) {
+            Topdownplayer.setImage(img`
+                3 . . . . . . . . . . . 
+                . . . . . . . . . . . . 
+                1 1 . . . . . . . . . . 
+                . . 1 . . . . . . . . . 
+                . . . 1 . 7 7 7 7 . . . 
+                . . . . 7 7 7 7 7 7 . . 
+                . . . 7 7 7 7 7 7 7 7 . 
+                . . 7 7 7 7 7 7 7 7 7 7 
+                . . 7 7 7 7 7 7 7 7 7 7 
+                . . 7 7 7 7 7 7 7 7 7 7 
+                . . . 7 7 7 7 7 7 7 7 . 
+                . . . . 7 7 7 7 7 7 . . 
+                . . . . . . 7 7 . . . . 
+                `)
+        }
+    }
+    if (Map == 2) {
+    	
+    }
+})
