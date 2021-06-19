@@ -20,8 +20,6 @@ function defAI () {
     Defence.follow(defpos2, 70)
     _2secdelay()
     Defence.follow(defpos1, 60)
-    _2secdelay()
-    tiles.setTilemap(tilemap`level11`)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Teleporter1, function (sprite, otherSprite) {
     Game1()
