@@ -11,16 +11,52 @@ namespace SpriteKind {
     export const track3 = SpriteKind.create()
     export const track4 = SpriteKind.create()
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.track2, function (sprite, otherSprite) {
-    aimpos = 2
-})
 function Game11 () {
     Clear2()
     tiles.setTilemap(tilemap`level3`)
-    Map = 2
+    Map = 1.1
     Aimsight = sprites.create(assets.image`Aim`, SpriteKind.aim)
     controller.moveSprite(Aimsight, 200, 200)
     setupforpostracking()
+}
+function target3 () {
+    if (aimpos == 3) {
+        if (controller.A.isPressed()) {
+            Aimsight.destroy()
+            puckanimation11 = sprites.create(img`
+                . . . . 1 1 1 1 1 1 1 1 . . . . 
+                . . 1 1 4 4 4 4 4 4 4 4 1 1 . . 
+                . 1 4 4 4 4 4 4 4 4 4 4 4 4 1 . 
+                1 2 4 4 4 4 4 4 4 4 4 4 4 4 2 1 
+                1 3 2 2 4 4 4 4 4 4 4 4 2 2 4 1 
+                1 3 3 3 2 2 2 2 2 2 2 2 4 4 4 1 
+                1 3 3 3 3 3 4 3 4 4 4 4 4 4 4 1 
+                1 1 3 3 3 3 4 3 4 4 4 4 4 4 1 1 
+                . . 1 1 3 3 4 3 4 4 4 4 1 1 . . 
+                . . . . 1 1 1 1 1 1 1 1 . . . . 
+                `, SpriteKind.Player)
+            puckanimation11.setPosition(80, 112)
+            pause(500)
+            puckanimation11.destroy()
+            puckanimation12 = sprites.create(img`
+                . . 1 1 1 1 . . 
+                . 1 4 4 4 4 1 . 
+                1 3 3 4 4 4 4 1 
+                1 3 3 3 4 4 4 1 
+                . 1 1 1 1 1 1 . 
+                `, SpriteKind.Player)
+            puckanimation12.setPosition(60, 100)
+            pause(500)
+            puckanimation12.destroy()
+            puckanimation13 = sprites.create(img`
+                1 1 1 1 
+                1 1 1 1 
+                `, SpriteKind.Player)
+            puckanimation13.setPosition(40, 88)
+            pause(750)
+            puckanimation13.destroy()
+        }
+    }
 }
 function Clear () {
     Net1.destroy()
@@ -41,12 +77,54 @@ function Goaldefstuff () {
         tiles.setTileAt(value2, assets.tile`myTile0`)
     }
 }
+sprites.onOverlap(SpriteKind.aim, SpriteKind.track4, function (sprite, otherSprite) {
+    aimpos = 4
+})
 function defAI () {
     Defence.follow(defpos3, 70)
     _2secdelay()
     Defence.follow(defpos2, 70)
     _2secdelay()
     Defence.follow(defpos1, 60)
+}
+function target2 () {
+    if (aimpos == 2) {
+        if (controller.A.isPressed()) {
+            Aimsight.destroy()
+            puckanimation11 = sprites.create(img`
+                . . . . 1 1 1 1 1 1 1 1 . . . . 
+                . . 1 1 4 4 4 4 4 4 4 4 1 1 . . 
+                . 1 4 4 4 4 4 4 4 4 4 4 4 4 1 . 
+                1 2 4 4 4 4 4 4 4 4 4 4 4 4 2 1 
+                1 3 2 2 4 4 4 4 4 4 4 4 2 2 4 1 
+                1 3 3 3 2 2 2 2 2 2 2 2 4 4 4 1 
+                1 3 3 3 3 3 4 3 4 4 4 4 4 4 4 1 
+                1 1 3 3 3 3 4 3 4 4 4 4 4 4 1 1 
+                . . 1 1 3 3 4 3 4 4 4 4 1 1 . . 
+                . . . . 1 1 1 1 1 1 1 1 . . . . 
+                `, SpriteKind.Player)
+            puckanimation11.setPosition(96, 112)
+            pause(500)
+            puckanimation11.destroy()
+            puckanimation12 = sprites.create(img`
+                . . 1 1 1 1 . . 
+                . 1 4 4 4 4 1 . 
+                1 3 3 4 4 4 4 1 
+                1 3 3 3 4 4 4 1 
+                . 1 1 1 1 1 1 . 
+                `, SpriteKind.Player)
+            puckanimation12.setPosition(112, 76)
+            pause(500)
+            puckanimation12.destroy()
+            puckanimation13 = sprites.create(img`
+                1 1 1 1 
+                1 1 1 1 
+                `, SpriteKind.Player)
+            puckanimation13.setPosition(128, 40)
+            pause(750)
+            puckanimation13.destroy()
+        }
+    }
 }
 // normal delay stops check diff functions
 function _2secdelay () {
@@ -335,6 +413,9 @@ function Clear2 () {
     line9.destroy()
     line10.destroy()
 }
+sprites.onOverlap(SpriteKind.aim, SpriteKind.track3, function (sprite, otherSprite) {
+    aimpos = 3
+})
 function Game2 () {
 	
 }
@@ -375,7 +456,7 @@ function setupforpostracking () {
         . . 7 . . . . . . . . . . 7 . . 
         . . . 7 . . . . . . . . 7 . . . 
         . . . . 7 7 7 7 7 7 7 7 . . . . 
-        `, SpriteKind.Player)
+        `, SpriteKind.track2)
     track2.setPosition(120, 40)
     track3 = sprites.create(img`
         . . . . 7 7 7 7 7 7 7 7 . . . . 
@@ -394,7 +475,7 @@ function setupforpostracking () {
         . . 7 . . . . . . . . . . 7 . . 
         . . . 7 . . . . . . . . 7 . . . 
         . . . . 7 7 7 7 7 7 7 7 . . . . 
-        `, SpriteKind.Player)
+        `, SpriteKind.track3)
     track3.setPosition(40, 88)
     track4 = sprites.create(img`
         . . . . 7 7 7 7 7 7 7 7 . . . . 
@@ -413,17 +494,50 @@ function setupforpostracking () {
         . . 7 . . . . . . . . . . 7 . . 
         . . . 7 . . . . . . . . 7 . . . 
         . . . . 7 7 7 7 7 7 7 7 . . . . 
-        `, SpriteKind.Player)
+        `, SpriteKind.track4)
     track4.setPosition(120, 88)
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.track3, function (sprite, otherSprite) {
-    aimpos = 3
-})
+function target4 () {
+    if (aimpos == 4) {
+        if (controller.A.isPressed()) {
+            Aimsight.destroy()
+            puckanimation11 = sprites.create(img`
+                . . . . 1 1 1 1 1 1 1 1 . . . . 
+                . . 1 1 4 4 4 4 4 4 4 4 1 1 . . 
+                . 1 4 4 4 4 4 4 4 4 4 4 4 4 1 . 
+                1 2 4 4 4 4 4 4 4 4 4 4 4 4 2 1 
+                1 3 2 2 4 4 4 4 4 4 4 4 2 2 4 1 
+                1 3 3 3 2 2 2 2 2 2 2 2 4 4 4 1 
+                1 3 3 3 3 3 4 3 4 4 4 4 4 4 4 1 
+                1 1 3 3 3 3 4 3 4 4 4 4 4 4 1 1 
+                . . 1 1 3 3 4 3 4 4 4 4 1 1 . . 
+                . . . . 1 1 1 1 1 1 1 1 . . . . 
+                `, SpriteKind.Player)
+            puckanimation11.setPosition(96, 112)
+            pause(500)
+            puckanimation11.destroy()
+            puckanimation12 = sprites.create(img`
+                . . 1 1 1 1 . . 
+                . 1 4 4 4 4 1 . 
+                1 3 3 4 4 4 4 1 
+                1 3 3 3 4 4 4 1 
+                . 1 1 1 1 1 1 . 
+                `, SpriteKind.Player)
+            puckanimation12.setPosition(108, 100)
+            pause(500)
+            puckanimation12.destroy()
+            puckanimation13 = sprites.create(img`
+                1 1 1 1 
+                1 1 1 1 
+                `, SpriteKind.Player)
+            puckanimation13.setPosition(120, 88)
+            pause(750)
+            puckanimation13.destroy()
+        }
+    }
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.defadvance, function (sprite, otherSprite) {
     Defence.follow(Topdownplayer, 90)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.track4, function (sprite, otherSprite) {
-    aimpos = 4
 })
 function Menu () {
     tiles.setTilemap(tilemap`Menu`)
@@ -676,6 +790,48 @@ function defstuffsetup () {
         tiles.setTileAt(value16, assets.tile`myTile0`)
     }
 }
+function target1 () {
+    if (aimpos == 1) {
+        if (controller.A.isPressed()) {
+            Aimsight.destroy()
+            puckanimation11 = sprites.create(img`
+                . . . . 1 1 1 1 1 1 1 1 . . . . 
+                . . 1 1 4 4 4 4 4 4 4 4 1 1 . . 
+                . 1 4 4 4 4 4 4 4 4 4 4 4 4 1 . 
+                1 2 4 4 4 4 4 4 4 4 4 4 4 4 2 1 
+                1 3 2 2 4 4 4 4 4 4 4 4 2 2 4 1 
+                1 3 3 3 2 2 2 2 2 2 2 2 4 4 4 1 
+                1 3 3 3 3 3 4 3 4 4 4 4 4 4 4 1 
+                1 1 3 3 3 3 4 3 4 4 4 4 4 4 1 1 
+                . . 1 1 3 3 4 3 4 4 4 4 1 1 . . 
+                . . . . 1 1 1 1 1 1 1 1 . . . . 
+                `, SpriteKind.Player)
+            puckanimation11.setPosition(80, 112)
+            pause(500)
+            puckanimation11.destroy()
+            puckanimation12 = sprites.create(img`
+                . . 1 1 1 1 . . 
+                . 1 4 4 4 4 1 . 
+                1 3 3 4 4 4 4 1 
+                1 3 3 3 4 4 4 1 
+                . 1 1 1 1 1 1 . 
+                `, SpriteKind.Player)
+            puckanimation12.setPosition(60, 76)
+            pause(500)
+            puckanimation12.destroy()
+            puckanimation13 = sprites.create(img`
+                1 1 1 1 
+                1 1 1 1 
+                `, SpriteKind.Player)
+            puckanimation13.setPosition(40, 40)
+            pause(750)
+            puckanimation13.destroy()
+        }
+    }
+}
+sprites.onOverlap(SpriteKind.aim, SpriteKind.track2, function (sprite, otherSprite) {
+    aimpos = 2
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.StartPuck, function (sprite, otherSprite) {
     Map = 1.1
     Topdownplayer.setImage(img`
@@ -698,7 +854,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.StartPuck, function (sprite, oth
     Goaldefstuff()
     defAI()
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.track1, function (sprite, otherSprite) {
+sprites.onOverlap(SpriteKind.aim, SpriteKind.track1, function (sprite, otherSprite) {
     aimpos = 1
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
@@ -749,9 +905,12 @@ let ref2: Sprite = null
 let ref1: Sprite = null
 let Net2: Sprite = null
 let Net1: Sprite = null
+let puckanimation13: Sprite = null
+let puckanimation12: Sprite = null
+let puckanimation11: Sprite = null
+let aimpos = 0
 let Aimsight: Sprite = null
 let Map = 0
-let aimpos = 0
 Menu()
 forever(function () {
     if (Map == 1) {
@@ -825,5 +984,9 @@ forever(function () {
                 . . . . . . 7 7 . . . . 
                 `)
         }
+        target1()
+        target2()
+        target3()
+        target4()
     }
 })
