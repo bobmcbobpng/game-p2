@@ -25,47 +25,8 @@ namespace SpriteKind {
     export const testHardWay2 = SpriteKind.create()
 }
 function Testgoalie () {
-    testsigh = sprites.create(img`
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        `, SpriteKind.testHardWay)
-    testsigh.setPosition(0, 64)
-    testsighvol2 = sprites.create(img`
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        `, SpriteKind.testHardWay2)
-    testsighvol2.setPosition(160, 64)
     testFleury = sprites.create(assets.image`fleury`, SpriteKind.Goalie)
     testFleury.setPosition(80, 64)
-    testFleury.follow(sigh)
 }
 function target3 () {
     if (aimpos == 3) {
@@ -105,6 +66,7 @@ function target3 () {
             puckanimation13.destroy()
             if (save == 1) {
                 goaliescore += 1
+                save = 0
             } else {
                 score += 1
                 light2 = sprites.create(img`
@@ -129,6 +91,7 @@ function target3 () {
                 pause(2000)
                 light2.destroy()
             }
+            clear3()
             GameScore()
         }
     }
@@ -204,11 +167,12 @@ function target2 () {
                 1 1 1 1 
                 1 1 1 1 
                 `, SpriteKind.finalpuck)
-            puckanimation13.setPosition(128, 40)
+            puckanimation13.setPosition(120, 40)
             pause(500)
             puckanimation13.destroy()
             if (save == 1) {
                 goaliescore += 1
+                save = 0
             } else {
                 score += 1
                 light2 = sprites.create(img`
@@ -233,6 +197,7 @@ function target2 () {
                 pause(2000)
                 light2.destroy()
             }
+            clear3()
             GameScore()
         }
     }
@@ -540,10 +505,6 @@ function Game11 () {
     Aimsight = sprites.create(assets.image`Aim`, SpriteKind.aim)
     controller.moveSprite(Aimsight, 200, 200)
 }
-sprites.onOverlap(SpriteKind.Goalie, SpriteKind.testHardWay2, function (sprite, otherSprite) {
-    testFleury.follow(testsighvol2)
-    testFleury.vx = randint(25, 75)
-})
 function setupforpostracking () {
     track1 = sprites.create(img`
         . . . . 7 7 7 7 7 7 7 7 . . . . 
@@ -703,6 +664,7 @@ function target4 () {
             puckanimation13.destroy()
             if (save == 1) {
                 goaliescore += 1
+                save = 0
             } else {
                 score += 1
                 light2 = sprites.create(img`
@@ -727,14 +689,11 @@ function target4 () {
                 pause(2000)
                 light2.destroy()
             }
+            clear3()
             GameScore()
         }
     }
 }
-sprites.onOverlap(SpriteKind.Goalie, SpriteKind.testHardWay, function (sprite, otherSprite) {
-    testFleury.follow(testsigh)
-    testFleury.vx = randint(-25, -75)
-})
 function awayscore () {
     if (goaliescore == 0) {
         num0away = sprites.create(img`
@@ -1014,6 +973,7 @@ function awayscore () {
             ................................................
             ................................................
             `, SpriteKind.number)
+        num3away.setPosition(120, 80)
         pause(3000)
         num3away.destroy()
     } else if (goaliescore == 4) {
@@ -1083,6 +1043,7 @@ function awayscore () {
             ................................................
             ................................................
             `, SpriteKind.number)
+        num4away.setPosition(120, 80)
         pause(3000)
         num4away.destroy()
     } else if (goaliescore == 5) {
@@ -1152,6 +1113,7 @@ function awayscore () {
             ................................................
             ................................................
             `, SpriteKind.number)
+        num5away.setPosition(120, 80)
         pause(3000)
         num5away.destroy()
     } else if (goaliescore == 6) {
@@ -1221,6 +1183,7 @@ function awayscore () {
             ................................................
             ................................................
             `, SpriteKind.number)
+        num6away.setPosition(120, 80)
         pause(3000)
         num6away.destroy()
     } else if (goaliescore == 7) {
@@ -1290,6 +1253,7 @@ function awayscore () {
             ................................................
             ................................................
             `, SpriteKind.number)
+        num7away.setPosition(120, 80)
         pause(3000)
         num7away.destroy()
     } else if (goaliescore == 8) {
@@ -1359,6 +1323,7 @@ function awayscore () {
             ................................................
             ................................................
             `, SpriteKind.number)
+        num8away.setPosition(120, 80)
         pause(3000)
         num8away.destroy()
     } else if (goaliescore == 9) {
@@ -1428,6 +1393,7 @@ function awayscore () {
             ................................................
             ................................................
             `, SpriteKind.number)
+        num9away.setPosition(120, 80)
         pause(3000)
         num9away.destroy()
     } else if (goaliescore == 10) {
@@ -1506,21 +1472,56 @@ function Tutorial () {
     cam_follow2.setPosition(80, 208)
     scene.cameraFollowSprite(camera)
     camera.setVelocity(0, 1)
-    game.splash("This is the tutorial, you can press refresh button at any time to return to the main menu")
+    game.splash("This is the tutorial, you can press the refresh button at any time to return to the main menu")
     game.splash("To start off, you are on a 1v1 trying to reach the goal.")
     camera.follow(cam_follow)
     pause(4000)
-    game.splash("This is the goal")
+    game.splash("This is the goal.")
     camera.follow(cam_follow2)
     pause(3000)
-    game.splash("That is the defence")
+    game.splash("That is the defence.")
     camera.follow(cam_follow)
     pause(3000)
-    game.splash("Once you reach the goal, touch it, and you will instantly start to shoot")
+    game.splash("Once you reach the goal, touch it, and you will instantly start to shoot.")
+    tiles.setTilemap(tilemap`level25`)
+    game.splash("This is the net")
+    game.splash("Movie your aim around and move to where you want to go.")
+    testaim = sprites.create(img`
+        . . . . . . 7 7 . . . . . . 
+        . . . . . . 7 7 . . . . . . 
+        . . . . . . 7 7 . . . . . . 
+        . . . . . . 7 7 . . . . . . 
+        . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . 
+        7 7 7 7 . . 7 7 . . 7 7 7 7 
+        7 7 7 7 . . 7 7 . . 7 7 7 7 
+        . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . 
+        . . . . . . 7 7 . . . . . . 
+        . . . . . . 7 7 . . . . . . 
+        . . . . . . 7 7 . . . . . . 
+        . . . . . . 7 7 . . . . . . 
+        `, SpriteKind.Player)
+    controller.moveSprite(testaim)
+    pause(10000)
+    game.splash("Now let's see the targets.")
     tiles.setTilemap(tilemap`level21`)
+    pause(2000)
+    game.splash("Try aiming at the targets.")
+    pause(5000)
+    game.splash("In the real game press button A to shoot.")
+    game.splash("You can keep practicing here for a bit and press the refresh button when you are ready to take on the real game...")
+    game.splash("Oh ya, I almost forgot you also need a goalie...")
+    game.splash("BRING HIM IN")
+    Testgoalie()
+    game.splash("OH NO!!!")
+    game.splash("Looks like Marc-André Fleury is are goalie for today.")
+    game.splash("Good luck...")
+    game.splash("You will need it.")
 }
 function Menu () {
     tiles.setTilemap(tilemap`Menu`)
+    game.splash("If this is your first time here, start by going to the referee to start the tutorial.")
     Map = 0
     Puck = sprites.create(assets.image`Puck`, SpriteKind.Player)
     controller.moveSprite(Puck)
@@ -1552,7 +1553,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.tptoshooting, function (sprite, 
     Game11()
 })
 function GameScore () {
-    clear3()
     tiles.setTilemap(tilemap`level15`)
     if (score == 0) {
         num0 = sprites.create(img`
@@ -2520,6 +2520,7 @@ function target1 () {
             puckanimation13.destroy()
             if (save == 1) {
                 goaliescore += 1
+                save = 0
             } else {
                 score += 1
                 light2 = sprites.create(img`
@@ -2544,6 +2545,7 @@ function target1 () {
                 pause(2000)
                 light2.destroy()
             }
+            clear3()
             GameScore()
         }
     }
@@ -2577,7 +2579,9 @@ sprites.onOverlap(SpriteKind.aim, SpriteKind.track1, function (sprite, otherSpri
     aimpos = 1
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-	
+    goaliescore += 1
+    Clear2()
+    GameScore()
 })
 function Game1 () {
     tiles.setTilemap(tilemap`Breakaway`)
@@ -2607,6 +2611,7 @@ let num3: Sprite = null
 let num2: Sprite = null
 let num1: Sprite = null
 let num0: Sprite = null
+let testaim: Sprite = null
 let cam_follow2: Sprite = null
 let cam_follow: Sprite = null
 let camera: Sprite = null
@@ -2637,6 +2642,7 @@ let defpos2: Sprite = null
 let defpos3: Sprite = null
 let Defence: Sprite = null
 let sighvol2: Sprite = null
+let sigh: Sprite = null
 let track4: Sprite = null
 let track3: Sprite = null
 let track2: Sprite = null
@@ -2658,10 +2664,7 @@ let puckanimation12: Sprite = null
 let puckanimation11: Sprite = null
 let Aimsight: Sprite = null
 let aimpos = 0
-let sigh: Sprite = null
 let testFleury: Sprite = null
-let testsighvol2: Sprite = null
-let testsigh: Sprite = null
 Menu()
 forever(function () {
     if (Map == 1) {
