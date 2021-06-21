@@ -216,17 +216,6 @@ namespace myTiles {
 . . . . . . . . . . 
 . . . . . . . . . . 
 `, [myTiles.transparency16,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7], TileScale.Sixteen);
-            case "level3":
-            case "level3":return tiles.createTilemap(hex`0a00080010101010101010101010100d0f0f0f0f0f0f0e1009060c0c0c0c0c0c070908030808080808080508080308080808080805080a020b0b0b0b0b0b040a0101010101010101010101010101010101010101`, img`
-2 2 2 2 2 2 2 2 2 2 
-2 . . . . . . . . 2 
-2 . . . . . . . . 2 
-2 . . . . . . . . 2 
-2 . . . . . . . . 2 
-2 . . . . . . . . 2 
-. . . . . . . . . . 
-. . . . . . . . . . 
-`, [myTiles.transparency16,myTiles.tile2,myTiles.tile10,myTiles.tile12,myTiles.tile14,myTiles.tile15,myTiles.tile16,myTiles.tile17,myTiles.tile18,myTiles.tile19,myTiles.tile20,myTiles.tile23,myTiles.tile24,myTiles.tile25,myTiles.tile26,myTiles.tile27,myTiles.tile28], TileScale.Sixteen);
             case "level4":
             case "level4":return tiles.createTilemap(hex`1000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000`, img`
 . . . . . . . . . . . . . . . . 
@@ -406,6 +395,17 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `, [myTiles.transparency16,sprites.castle.tileGrass2], TileScale.Sixteen);
+            case "level3":
+            case "level3":return tiles.createTilemap(hex`0a00080010101010101010101010100d0f0f0f0f0f0f0e1009060c0c0c0c0c0c070908030808080808080508080308080808080805080a020b0b0b0b0b0b040a0101010101010101010101010101010101010101`, img`
+2 2 2 2 2 2 2 2 2 2 
+2 . . . . . . . . 2 
+2 . . . . . . . . 2 
+2 . . . . . . . . 2 
+2 . . . . . . . . 2 
+2 . . . . . . . . 2 
+2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 
+`, [myTiles.transparency16,myTiles.tile2,myTiles.tile10,myTiles.tile12,myTiles.tile14,myTiles.tile15,myTiles.tile16,myTiles.tile17,myTiles.tile18,myTiles.tile19,myTiles.tile20,myTiles.tile23,myTiles.tile24,myTiles.tile25,myTiles.tile26,myTiles.tile27,myTiles.tile28], TileScale.Sixteen);
         }
         return null;
     })

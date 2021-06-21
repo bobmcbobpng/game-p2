@@ -3,7 +3,9 @@
     "description": "",
     "dependencies": {
         "device": "*",
-        "Timers": "github:microsoft/arcade-timers#v1.1.0"
+        "Timers": "github:microsoft/arcade-timers#v1.1.0",
+        "darts": "*",
+        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.1.0"
     },
     "files": [
         "main.blocks",
@@ -37,10 +39,10 @@
         "#ff0000",
         "#f5b716",
         "#0342b1",
-        "#ffffff",
-        "#ffffff",
-        "#ffffff",
-        "#ffffff",
+        "#f75850",
+        "#f7cbad",
+        "#545454",
+        "#a3eaeb",
         "#ffffff",
         "#ffffff"
     ]
