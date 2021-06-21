@@ -10,14 +10,18 @@ namespace SpriteKind {
     export const track2 = SpriteKind.create()
     export const track3 = SpriteKind.create()
     export const track4 = SpriteKind.create()
+    export const Goalie = SpriteKind.create()
+    export const bounceBecauseICouldNotFigueItOutAndNowIAmDoingItTheHardWay = SpriteKind.create()
+    export const bounceBecauseICouldNotFigueItOutAndNowIAmDoingItTheHardWay2 = SpriteKind.create()
 }
 function Game11 () {
     Clear2()
     tiles.setTilemap(tilemap`level3`)
     Map = 1.1
+    setupforpostracking()
+    goalie()
     Aimsight = sprites.create(assets.image`Aim`, SpriteKind.aim)
     controller.moveSprite(Aimsight, 200, 200)
-    setupforpostracking()
 }
 function target3 () {
     if (aimpos == 3) {
@@ -416,6 +420,10 @@ function Clear2 () {
 sprites.onOverlap(SpriteKind.aim, SpriteKind.track3, function (sprite, otherSprite) {
     aimpos = 3
 })
+sprites.onOverlap(SpriteKind.Goalie, SpriteKind.bounceBecauseICouldNotFigueItOutAndNowIAmDoingItTheHardWay, function (sprite, otherSprite) {
+    Fleury.follow(sighvol2)
+    Fleury.vx = randint(25, 75)
+})
 function Game2 () {
 	
 }
@@ -497,6 +505,49 @@ function setupforpostracking () {
         `, SpriteKind.track4)
     track4.setPosition(120, 88)
 }
+function goalie () {
+    sigh = sprites.create(img`
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        `, SpriteKind.bounceBecauseICouldNotFigueItOutAndNowIAmDoingItTheHardWay)
+    sigh.setPosition(0, 64)
+    sighvol2 = sprites.create(img`
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        `, SpriteKind.bounceBecauseICouldNotFigueItOutAndNowIAmDoingItTheHardWay2)
+    sighvol2.setPosition(160, 64)
+    Fleury = sprites.create(assets.image`fleury`, SpriteKind.Goalie)
+    Fleury.setPosition(80, 64)
+    Fleury.follow(sigh)
+}
 function target4 () {
     if (aimpos == 4) {
         if (controller.A.isPressed()) {
@@ -538,6 +589,10 @@ function target4 () {
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.defadvance, function (sprite, otherSprite) {
     Defence.follow(Topdownplayer, 90)
+})
+sprites.onOverlap(SpriteKind.Goalie, SpriteKind.bounceBecauseICouldNotFigueItOutAndNowIAmDoingItTheHardWay2, function (sprite, otherSprite) {
+    Fleury.follow(sigh)
+    Fleury.vx = randint(-25, -75)
 })
 function Menu () {
     tiles.setTilemap(tilemap`Menu`)
@@ -833,7 +888,7 @@ sprites.onOverlap(SpriteKind.aim, SpriteKind.track2, function (sprite, otherSpri
     aimpos = 2
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.StartPuck, function (sprite, otherSprite) {
-    Map = 1.1
+    Map = 1
     Topdownplayer.setImage(img`
         . . . . . . . . . . . 3 
         . . . . . . . . . . . . 
@@ -879,10 +934,13 @@ function Game1 () {
     defpositionfollow()
 }
 let Startpuck: Sprite = null
+let sigh: Sprite = null
 let track4: Sprite = null
 let track3: Sprite = null
 let track2: Sprite = null
 let track1: Sprite = null
+let sighvol2: Sprite = null
+let Fleury: Sprite = null
 let line10: Sprite = null
 let line9: Sprite = null
 let line8: Sprite = null
@@ -948,8 +1006,6 @@ forever(function () {
                 . . . . . . 7 7 . . . . 
                 `)
         }
-    }
-    if (Map == 1.1) {
         if (controller.right.isPressed()) {
             Topdownplayer.setImage(img`
                 . . . . . . . . . . . 3 
@@ -984,6 +1040,8 @@ forever(function () {
                 . . . . . . 7 7 . . . . 
                 `)
         }
+    }
+    if (Map == 1.1) {
         target1()
         target2()
         target3()
