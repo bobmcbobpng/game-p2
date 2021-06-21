@@ -19,6 +19,53 @@ namespace SpriteKind {
     export const Num1 = SpriteKind.create()
     export const test = SpriteKind.create()
     export const number = SpriteKind.create()
+    export const cam = SpriteKind.create()
+    export const idk = SpriteKind.create()
+    export const testHardWay = SpriteKind.create()
+    export const testHardWay2 = SpriteKind.create()
+}
+function Testgoalie () {
+    testsigh = sprites.create(img`
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        `, SpriteKind.testHardWay)
+    testsigh.setPosition(0, 64)
+    testsighvol2 = sprites.create(img`
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        `, SpriteKind.testHardWay2)
+    testsighvol2.setPosition(160, 64)
+    testFleury = sprites.create(assets.image`fleury`, SpriteKind.Goalie)
+    testFleury.setPosition(80, 64)
+    testFleury.follow(sigh)
 }
 function target3 () {
     if (aimpos == 3) {
@@ -460,7 +507,7 @@ function defpositionfollow () {
     controller.moveSprite(defpos3)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Teleporter2, function (sprite, otherSprite) {
-    Game2()
+    Tutorial()
 })
 function Clear2 () {
     Topdownplayer.destroy()
@@ -493,9 +540,10 @@ function Game11 () {
     Aimsight = sprites.create(assets.image`Aim`, SpriteKind.aim)
     controller.moveSprite(Aimsight, 200, 200)
 }
-function Game2 () {
-	
-}
+sprites.onOverlap(SpriteKind.Goalie, SpriteKind.testHardWay2, function (sprite, otherSprite) {
+    testFleury.follow(testsighvol2)
+    testFleury.vx = randint(25, 75)
+})
 function setupforpostracking () {
     track1 = sprites.create(img`
         . . . . 7 7 7 7 7 7 7 7 . . . . 
@@ -683,6 +731,10 @@ function target4 () {
         }
     }
 }
+sprites.onOverlap(SpriteKind.Goalie, SpriteKind.testHardWay, function (sprite, otherSprite) {
+    testFleury.follow(testsigh)
+    testFleury.vx = randint(-25, -75)
+})
 function awayscore () {
     if (goaliescore == 0) {
         num0away = sprites.create(img`
@@ -1392,6 +1444,81 @@ sprites.onOverlap(SpriteKind.Goalie, SpriteKind.bounceBecauseICouldNotFigueItOut
 sprites.onOverlap(SpriteKind.Goalie, SpriteKind.finalpuck, function (sprite, otherSprite) {
     save = 1
 })
+function Tutorial () {
+    Clear()
+    tiles.setTilemap(tilemap`level23`)
+    camera = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.cam)
+    camera.setPosition(80, 360)
+    cam_follow = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.idk)
+    cam_follow.setPosition(80, 16)
+    cam_follow2 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.idk)
+    cam_follow2.setPosition(80, 208)
+    scene.cameraFollowSprite(camera)
+    camera.setVelocity(0, 1)
+    game.splash("This is the tutorial, you can press refresh button at any time to return to the main menu")
+    game.splash("To start off, you are on a 1v1 trying to reach the goal.")
+    camera.follow(cam_follow)
+    pause(4000)
+    game.splash("This is the goal")
+    camera.follow(cam_follow2)
+    pause(3000)
+    game.splash("That is the defence")
+    camera.follow(cam_follow)
+    pause(3000)
+    game.splash("Once you reach the goal, touch it, and you will instantly start to shoot")
+    tiles.setTilemap(tilemap`level21`)
+}
 function Menu () {
     tiles.setTilemap(tilemap`Menu`)
     Map = 0
@@ -2480,6 +2607,9 @@ let num3: Sprite = null
 let num2: Sprite = null
 let num1: Sprite = null
 let num0: Sprite = null
+let cam_follow2: Sprite = null
+let cam_follow: Sprite = null
+let camera: Sprite = null
 let num9away: Sprite = null
 let num8away: Sprite = null
 let num7away: Sprite = null
@@ -2507,7 +2637,6 @@ let defpos2: Sprite = null
 let defpos3: Sprite = null
 let Defence: Sprite = null
 let sighvol2: Sprite = null
-let sigh: Sprite = null
 let track4: Sprite = null
 let track3: Sprite = null
 let track2: Sprite = null
@@ -2529,6 +2658,10 @@ let puckanimation12: Sprite = null
 let puckanimation11: Sprite = null
 let Aimsight: Sprite = null
 let aimpos = 0
+let sigh: Sprite = null
+let testFleury: Sprite = null
+let testsighvol2: Sprite = null
+let testsigh: Sprite = null
 Menu()
 forever(function () {
     if (Map == 1) {
