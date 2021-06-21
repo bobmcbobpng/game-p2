@@ -5,7 +5,8 @@
         "device": "*",
         "Timers": "github:microsoft/arcade-timers#v1.1.0",
         "darts": "*",
-        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.1.0"
+        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.1.0",
+        "sevenseg": "*"
     },
     "files": [
         "main.blocks",
