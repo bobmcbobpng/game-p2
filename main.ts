@@ -1473,6 +1473,7 @@ function Tutorial () {
     scene.cameraFollowSprite(camera)
     camera.setVelocity(0, 1)
     game.splash("This is the tutorial, you can press the refresh button at any time to return to the main menu")
+    game.splash("(do not quit tutorial until there are no more button A's to press, it looks like it ends but then keeps going)")
     game.splash("To start off, you are on a 1v1 trying to reach the goal.")
     camera.follow(cam_follow)
     pause(4000)
